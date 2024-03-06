@@ -1,0 +1,102 @@
+version: "3.8"
+
+services:
+  user_db_host:
+    image: mysql:8.0
+    container_name: user_db_host
+    restart: always
+    environment:
+      - MYSQL_DATABASE=user_db
+      - MYSQL_ROOT_PASSWORD=0932736505
+    ports:
+     - 3301:3306
+    volumes:
+      - user_db_host:/var/lib/mysql
+      - ./user-service/config/init.sql:/docker-entrypoint-initdb.d/init.sql
+
+  # product_db_host:
+  #   image: mysql:8.0
+  #   container_name: product_db_host
+  #   restart: always
+  #   environment:
+  #     - MYSQL_ROOT_PASSWORD=root123
+  #   ports:
+  #     - '3302:3306'
+  #   volumes:
+  #     - product_db_host:/var/lib/mysql
+  #     - ./product-service/config/init.sql:/docker-entrypoint-initdb.d/init.sql
+
+  # system_db_host:
+  #   image: mysql:8.0
+  #   container_name: system_db_host
+  #   restart: always
+  #   environment:
+  #     - MYSQL_ROOT_PASSWORD=root123
+  #   ports:
+  #     - '3303:3306'
+  #   volumes:
+  #     - system_db_host:/var/lib/mysql
+  #     - ./system-service/config/init.sql:/docker-entrypoint-initdb.d/init.sql
+
+  user_service:
+    build:
+      context: user-service
+      # Correct the path to your Dockerfile
+      dockerfile: Dockerfile
+    ports:
+      - 5001:5001
+    # Important to bind/mount your codebase dir to /app dir for live reload
+    volumes:
+      - ./user-service:/app
+    
+
+    # user_service:
+    # container_name: user_service
+    # image: golang:1.18
+    # ports:
+    #   - '5001:5001'
+    #   - '50010:50010'
+    # restart: always
+    # volumes:
+    #   - ./user-service:/app
+    # command: sh -c "go mod download && go run main.go"
+
+
+  # product_service:
+  #   container_name: product_service
+  #   image: golang:1.18
+  #   working_dir: /app
+  #   ports:
+  #     - '5002:5002'
+  #   restart: always
+  #   volumes:
+  #     - ./product-service:/app
+  #   command: sh -c "go mod download && go run main.go"
+
+  # system_service:
+  #   container_name: system_service
+  #   image: golang:1.18
+  #   working_dir: /app
+  #   ports:
+  #     - '5003:5003'
+  #   restart: always
+  #   volumes:
+  #     - ./system-service:/app
+  #   command: sh -c "go mod download && go run main.go"
+
+  # qts_api_gateway:
+  #   container_name: qts_api_gateway
+  #   image: devopsfaith/krakend:latest
+  #   restart: always
+  #   volumes:
+  #     - ./api-gateway:/etc/krakend
+  #   ports:
+  #     - "5050:5050"
+
+volumes:
+  user_db_host:
+    driver: local
+  # product_db_host:
+  #   driver: local
+  # system_db_host:
+  #   driver: local

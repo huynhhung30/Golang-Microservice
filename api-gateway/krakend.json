@@ -1,0 +1,309 @@
+{
+    "version": 3,
+    "name": "My lovely gateway",
+    "port": 5050,
+    "timeout": "10s",
+    "extra_config": {
+        "security/cors": {
+            "allow_origins": [
+                "*"
+            ],
+            "allow_methods": [
+                "HEAD",
+                "GET",
+                "POST",
+                "PUT",
+                "DELETE"
+            ],
+            "expose_headers": [
+                "Content-Length",
+                "Content-Type"
+            ],
+            "allow_headers": [
+                "Accept-Language",
+                "Content-Type",
+                "access-control-allow-origin",
+                "access-control-allow-headers",
+                "authorization"
+            ],
+            "max_age": "12h",
+            "allow_credentials": false,
+            "debug": false
+        }
+    },
+    "endpoints": [
+        {
+            "endpoint": "/user-svc/api/v1/{path_1}/{path_2}",
+            "method": "GET",
+            "output_encoding": "no-op",
+            "backend": [
+                {
+                    "url_pattern": "/api/v1/{path_1}/{path_2}",
+                    "host": [
+                        "http://172.17.0.1:5001"
+                    ]
+                }
+            ],
+            "input_query_strings": [
+                "page",
+                "limit"
+            ],
+            "input_headers": [
+                "Authorization"
+            ]
+        },
+        {
+            "endpoint": "/user-svc/api/v1/{path_1}/{path_2}/{path_3}",
+            "method": "GET",
+            "output_encoding": "no-op",
+            "backend": [
+                {
+                    "url_pattern": "/api/v1/{path_1}/{path_2}/{path_3}",
+                    "host": [
+                        "http://172.17.0.1:5001"
+                    ]
+                }
+            ],
+            "input_query_strings": [
+                "page",
+                "limit"
+            ],
+            "input_headers": [
+                "Authorization"
+            ]
+        },
+        {
+            "endpoint": "/user-svc/api/v1/{path_1}/{path_2}",
+            "method": "POST",
+            "output_encoding": "no-op",
+            "backend": [
+                {
+                    "url_pattern": "/api/v1/{path_1}/{path_2}",
+                    "host": [
+                        "http://172.17.0.1:5001"
+                    ]
+                }
+            ],
+            "input_headers": [
+                "Authorization",
+                "Content-Type"
+            ]
+        },
+        {
+            "endpoint": "/user-svc/api/v1/{path_1}/{path_2}",
+            "method": "PUT",
+            "output_encoding": "no-op",
+            "backend": [
+                {
+                    "url_pattern": "/api/v1/{path_1}/{path_2}",
+                    "host": [
+                        "http://172.17.0.1:5001"
+                    ]
+                }
+            ],
+            "input_headers": [
+                "Authorization",
+                "Content-Type"
+            ]
+        },
+        {
+            "endpoint": "/user-svc/api/v1/{path_1}/{path_2}",
+            "method": "DELETE",
+            "output_encoding": "no-op",
+            "backend": [
+                {
+                    "url_pattern": "/api/v1/{path_1}/{path_2}",
+                    "host": [
+                        "http://172.17.0.1:5001"
+                    ]
+                }
+            ],
+            "input_headers": [
+                "Authorization",
+                "Content-Type"
+            ]
+        },
+        {
+            "endpoint": "/product-svc/api/v1/{path_1}/{path_2}",
+            "method": "GET",
+            "output_encoding": "no-op",
+            "backend": [
+                {
+                    "url_pattern": "/api/v1/{path_1}/{path_2}",
+                    "host": [
+                        "http://172.17.0.1:5002"
+                    ]
+                }
+            ],
+            "input_query_strings": [
+                "page",
+                "limit"
+            ],
+            "input_headers": [
+                "Authorization"
+            ]
+        },
+        {
+            "endpoint": "/product-svc/api/v1/{path_1}/{path_2}/{path_3}",
+            "method": "GET",
+            "output_encoding": "no-op",
+            "backend": [
+                {
+                    "url_pattern": "/api/v1/{path_1}/{path_2}/{path_3}",
+                    "host": [
+                        "http://172.17.0.1:5002"
+                    ]
+                }
+            ],
+            "input_query_strings": [
+                "page",
+                "limit"
+            ],
+            "input_headers": [
+                "Authorization"
+            ]
+        },
+        {
+            "endpoint": "/product-svc/api/v1/{path_1}/{path_2}",
+            "method": "POST",
+            "output_encoding": "no-op",
+            "backend": [
+                {
+                    "url_pattern": "/api/v1/{path_1}/{path_2}",
+                    "host": [
+                        "http://172.17.0.1:5002"
+                    ]
+                }
+            ],
+            "input_headers": [
+                "Authorization",
+                "Content-Type"
+            ]
+        },
+        {
+            "endpoint": "/product-svc/api/v1/{path_1}/{path_2}",
+            "method": "PUT",
+            "output_encoding": "no-op",
+            "backend": [
+                {
+                    "url_pattern": "/api/v1/{path_1}/{path_2}",
+                    "host": [
+                        "http://172.17.0.1:5002"
+                    ]
+                }
+            ],
+            "input_headers": [
+                "Authorization",
+                "Content-Type"
+            ]
+        },
+        {
+            "endpoint": "/product-svc/api/v1/{path_1}/{path_2}",
+            "method": "DELETE",
+            "output_encoding": "no-op",
+            "backend": [
+                {
+                    "url_pattern": "/api/v1/{path_1}/{path_2}",
+                    "host": [
+                        "http://172.17.0.1:5002"
+                    ]
+                }
+            ],
+            "input_headers": [
+                "Authorization",
+                "Content-Type"
+            ]
+        },
+        {
+            "endpoint": "/system-svc/api/v1/{path_1}/{path_2}",
+            "method": "GET",
+            "output_encoding": "no-op",
+            "backend": [
+                {
+                    "url_pattern": "/api/v1/{path_1}/{path_2}",
+                    "host": [
+                        "http://172.17.0.1:5003"
+                    ]
+                }
+            ],
+            "input_query_strings": [
+                "page",
+                "limit"
+            ],
+            "input_headers": [
+                "Authorization"
+            ]
+        },
+        {
+            "endpoint": "/system-svc/api/v1/{path_1}/{path_2}/{path_3}",
+            "method": "GET",
+            "output_encoding": "no-op",
+            "backend": [
+                {
+                    "url_pattern": "/api/v1/{path_1}/{path_2}/{path_3}",
+                    "host": [
+                        "http://172.17.0.1:5003"
+                    ]
+                }
+            ],
+            "input_query_strings": [
+                "page",
+                "limit"
+            ],
+            "input_headers": [
+                "Authorization"
+            ]
+        },
+        {
+            "endpoint": "/system-svc/api/v1/{path_1}/{path_2}",
+            "method": "POST",
+            "output_encoding": "no-op",
+            "backend": [
+                {
+                    "url_pattern": "/api/v1/{path_1}/{path_2}",
+                    "host": [
+                        "http://172.17.0.1:5003"
+                    ]
+                }
+            ],
+            "input_headers": [
+                "Authorization",
+                "Content-Type"
+            ]
+        },
+        {
+            "endpoint": "/system-svc/api/v1/{path_1}/{path_2}",
+            "method": "PUT",
+            "output_encoding": "no-op",
+            "backend": [
+                {
+                    "url_pattern": "/api/v1/{path_1}/{path_2}",
+                    "host": [
+                        "http://172.17.0.1:5003"
+                    ]
+                }
+            ],
+            "input_headers": [
+                "Authorization",
+                "Content-Type"
+            ]
+        },
+        {
+            "endpoint": "/system-svc/api/v1/{path_1}/{path_2}",
+            "method": "DELETE",
+            "output_encoding": "no-op",
+            "backend": [
+                {
+                    "url_pattern": "/api/v1/{path_1}/{path_2}",
+                    "host": [
+                        "http://172.17.0.1:5003"
+                    ]
+                }
+            ],
+            "input_headers": [
+                "Authorization",
+                "Content-Type"
+            ]
+        }
+    ]
+}
