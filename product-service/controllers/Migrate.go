@@ -8,7 +8,7 @@ import (
 
 // Auto migrate
 func Migrate() {
-	config.DB.AutoMigrate(
+	config.DB.Debug().AutoMigrate(
 		models.ProductModel{},
 	)
 	functions.ShowLog("MigrateModel", "Success")

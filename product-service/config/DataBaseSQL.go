@@ -1,7 +1,6 @@
 package config
 
 import (
-	"fmt"
 	"os"
 
 	_ "github.com/go-sql-driver/mysql"
@@ -14,6 +13,7 @@ type infoDatabaseSQL struct {
 	Password   string
 	Port       string
 	DriverConn string
+	SslMode    string
 }
 
 func getDiverConn() (infoDB infoDatabaseSQL) {
@@ -22,6 +22,7 @@ func getDiverConn() (infoDB infoDatabaseSQL) {
 	infoDB.Username = os.Getenv("DB_USER")
 	infoDB.Password = os.Getenv("DB_PASS")
 	infoDB.Port = os.Getenv("DB_PORT")
-	infoDB.DriverConn = fmt.Sprintf("%s:%s@tcp(%s:%s)/%s?parseTime=true", infoDB.Username, infoDB.Password, infoDB.Hostname, infoDB.Port, infoDB.Name)
+	infoDB.SslMode = os.Getenv("DB_SSLMODE")
+	// infoDB.DriverConn = fmt.Sprintf("%s://%s@%s:%s/%s", infoDB.Username, infoDB.Password, infoDB.Hostname, infoDB.Port, infoDB.Name, infoDB.SslMode)
 	return infoDB
 }
