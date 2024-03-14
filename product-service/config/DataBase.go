@@ -2,6 +2,7 @@ package config
 
 import (
 	"fmt"
+	"product_service/utils/functions"
 
 	_ "github.com/jinzhu/gorm/dialects/postgres"
 	"gorm.io/driver/postgres"
@@ -27,11 +28,14 @@ func GormOpen() (gormDB *gorm.DB, err error) {
 	dsn := fmt.Sprintf("host=%s port=%s user=%s password=%s dbname=%s sslmode=%s", infoDatabase.Hostname, infoDatabase.Port, infoDatabase.Username, infoDatabase.Password, infoDatabase.Name, infoDatabase.SslMode)
 	gormDB, err = gorm.Open(postgres.Open(dsn), &gorm.Config{})
 	if err != nil {
+		functions.ShowLog("errOpen", err)
 		return
 	}
 
 	err = gormDB.Use(dbresolver.Register(dbresolver.Config{
 		Replicas: []gorm.Dialector{postgres.Open(dsn)},
 	}))
+	functions.ShowLog("errRegister", err)
+
 	return
 }
