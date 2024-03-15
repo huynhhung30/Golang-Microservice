@@ -35,19 +35,20 @@ func CreateProduct(c *gin.Context) {
 
 // Update Product
 func UpdateProduct(c *gin.Context) {
-	tokenInfo := utils.GetTokenInfo(c)
-	if tokenInfo.UserId == 0 {
-		RES_ERROR_MSG(c, http.StatusUnauthorized, constants.MSG_INVALID_INPUT, nil)
+	idParam := c.Params.ByName("id")
+	id, err := strconv.Atoi(idParam)
+	if err != nil {
+		RES_ERROR_MSG(c, http.StatusNotAcceptable, constants.MSG_INVALID_INPUT, nil)
 		return
 	}
 	requestBody := models.ProductModel{}
-	err := BindJSON(c, &requestBody)
-	if err != nil {
+	errRequestBody := BindJSON(c, &requestBody)
+	if errRequestBody != nil {
 		RES_ERROR_MSG(c, http.StatusNotAcceptable, constants.MSG_INVALID_INPUT, err)
 		return
 	}
-	requestBody.UpdatedBy = tokenInfo.UserId
-	product, err := models.UpdateProduct(requestBody)
+	functions.ShowLog("requestBody", requestBody)
+	product, err := models.UpdateProduct(requestBody, id)
 	if err != nil {
 		RES_ERROR_MSG(c, http.StatusBadRequest, err.Error(), nil)
 		return

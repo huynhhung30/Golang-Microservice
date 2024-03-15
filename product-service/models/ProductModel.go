@@ -35,10 +35,14 @@ func CreateProduct(productBody *ProductModel) (*ProductModel, error) {
 }
 
 // Update Product
-func UpdateProduct(productBody ProductModel) (ProductModel, error) {
+func UpdateProduct(productBody ProductModel, id int) (ProductModel, error) {
+	functions.ShowLog("productBody", productBody)
 	params := map[string]interface{}{
-		"updated_by": productBody.UpdatedBy,
-		"updated_at": functions.CurrentTime(),
+		"updated_by":  id,
+		"name":        productBody.Name,
+		"description": productBody.Description,
+		"thumb_image": productBody.ThumbImage,
+		"updated_at":  functions.CurrentTime(),
 	}
 	if productBody.Name != "" {
 		params["name"] = productBody.Name
@@ -49,7 +53,7 @@ func UpdateProduct(productBody ProductModel) (ProductModel, error) {
 	if productBody.ThumbImage != "" {
 		params["thumb_image"] = productBody.ThumbImage
 	}
-	err := config.DB.Model(&productBody).Debug().Where("id = ?", productBody.Id).Updates(params).Take(&productBody).Error
+	err := config.DB.Model(&productBody).Debug().Where("id = ?", id).Updates(params).Take(&productBody).Error
 	return productBody, err
 }
 
